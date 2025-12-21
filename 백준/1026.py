@@ -1,13 +1,26 @@
 import sys
 input = sys.stdin.readline
+
 n = int(input())
-a = list(map(int,input().split()))
-b = list(map(int,input().split()))
-a.sort()
-b.sort(reverse=True)
+A = list(map(int, input().split()))
+A.sort()
 
-ans = 0
-for x, y in zip(a, b):
-    ans += x * y
+m = int(input())
+B = list(map(int, input().split()))
 
-print(ans)
+def binary_search(arr, target):
+    left, right = 0, len(arr)-1
+
+    while left<=right:
+        mid = (left+right)//2
+        if arr[mid] == target:
+            return 1
+        elif arr[mid] > target:
+            right = mid - 1
+        elif arr[mid] < target:
+            left = mid + 1
+    
+    return 0
+
+for x in B:
+    print(binary_search(A,x))
