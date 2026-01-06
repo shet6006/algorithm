@@ -8,3 +8,4 @@ lists.sort()
 lists.sort(key=len)
 for i in range(len(lists)):
     print(lists[i])
+lists.sort(lambda x : len(x))
