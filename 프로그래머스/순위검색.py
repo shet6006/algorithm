@@ -1,9 +1,33 @@
-info = ["java backend junior pizza 150","python frontend senior chicken 210","python frontend senior chicken 150","cpp backend senior pizza 260","java backend junior chicken 80","python backend senior chicken 50"]
-lang = []
-occup = []
-history = []
-soulFood = []
-score = []
-for line in info:
-    lang, occup, history, soulFood, score = line.split()
-print(lang, occup, history, soulFood, score)
+from collections import defaultdict
+from bisect import bisect_left
+
+def solution(info, query):
+    db = defaultdict(list)
+
+    # 1. info 전처리
+    for line in info:
+        lang, job, career, food, score = line.split()
+        score = int(score)
+
+        for l in (lang, '-'):
+            for j in (job, '-'):
+                for c in (career, '-'):
+                    for f in (food, '-'):
+                        db[(l, j, c, f)].append(score)
+
+    # 2. 점수 정렬
+    for key in db:
+        db[key].sort()
+
+    # 3. query 처리
+    answer = []
+    for q in query:
+        q = q.replace("and ", "")
+        l, j, c, f, score = q.split()
+        score = int(score)
+
+        scores = db[(l, j, c, f)]
+        cnt = len(scores) - bisect_left(scores, score)
+        answer.append(cnt)
+
+    return answer
