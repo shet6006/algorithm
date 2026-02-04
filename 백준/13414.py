@@ -5,7 +5,7 @@ k, l = map(int, input().split())
 dict1 = {}
 
 for i in range(l):
-    dict1[int(input())] = i
+    dict1[input().rstrip()] = i
 
 sorted_items = sorted(dict1.items(), key=lambda x: x[1])
 
