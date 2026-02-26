@@ -1,10 +1,9 @@
-# deque=[]
-# N=int(input())
-# for i in range(1,N+1):
-#     deque.append(i)
-# while len(deque) > 1:
-#     deque.pop(0)
-#     deque.append(deque[0])
-#     deque.pop(0)
-# print(deque[0])
-#########실패########
+from collections import deque
+n = int(input())
+de = deque()
+for i in range(1,n+1):
+    de.append(i)
+while len(de) != 1:
+    de.popleft()
+    de.append(de.popleft())
+print(de[0])
